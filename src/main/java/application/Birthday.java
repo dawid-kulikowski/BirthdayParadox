@@ -1,8 +1,6 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class Birthday {
     private Random random = new Random();
@@ -20,6 +18,24 @@ public class Birthday {
        printBirthdayStatistics(sameBirthdayCases,numberOfTrials);
     }
 
+    public void checkDaysOfYear(int numberOfPeople, int numberOfTrials){
+       final Set<Integer> ALL_DAYS =  new HashSet<>();
+       for (int i=1;i<NUMBER_OF_DAYS;i++){
+           ALL_DAYS.add(i);
+           i++;
+       }
+
+        for(int i=0; i<numberOfTrials; i++){
+            ArrayList<Integer> listOfBirthdays = getRandomBirthdays(numberOfPeople);
+            if(listOfBirthdays.containsAll(ALL_DAYS)){
+                System.out.println("All of the birthdays are taken. People needed to fill all birthday: " + listOfBirthdays.size());
+            }
+        }
+
+    }
+
+
+
  ArrayList<Integer> getRandomBirthdays(int numberOfPeople) {
      ArrayList<Integer> birthdays = new ArrayList<>();
      for (int i = 0; i < numberOfPeople; i++) {
@@ -27,6 +43,7 @@ public class Birthday {
      }
      return birthdays;
  }
+
 
    boolean foundDuplicateBirthday(ArrayList<Integer> listOfBirthdays) {
        return !listOfBirthdays.stream().allMatch(new HashSet<>()::add);
