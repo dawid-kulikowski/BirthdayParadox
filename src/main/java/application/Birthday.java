@@ -8,14 +8,13 @@ public class Birthday {
 
     public void checkBirthdayTrials(int numberOfPeople, int numberOfTrials) {
         int sameBirthdayCases = 0;
-
         for (int i = 0; i < numberOfTrials; i++) {
             ArrayList<Integer> listOfBirthdays = getRandomBirthdays(numberOfPeople);
             if (foundDuplicateBirthday(listOfBirthdays)) {
                 sameBirthdayCases++;
             }
         }
-       printBirthdayStatistics(sameBirthdayCases,numberOfTrials);
+       printBirthdayStatistics(sameBirthdayCases,numberOfTrials, numberOfPeople);
     }
 
     public void checkDaysOfYear(int numberOfPeople, int numberOfTrials){
@@ -35,7 +34,6 @@ public class Birthday {
     }
 
 
-
  ArrayList<Integer> getRandomBirthdays(int numberOfPeople) {
      ArrayList<Integer> birthdays = new ArrayList<>();
      for (int i = 0; i < numberOfPeople; i++) {
@@ -49,7 +47,9 @@ public class Birthday {
        return !listOfBirthdays.stream().allMatch(new HashSet<>()::add);
         }
 
-        private void printBirthdayStatistics(int sameBirthdayCases, int numberOfTrials) {
-            System.out.println("% of times matching birthdays " + numberOfTrials + " trials: "+ (sameBirthdayCases * 100.0f) / numberOfTrials + "%" );
+        private void printBirthdayStatistics(int sameBirthdayCases, int numberOfTrials, int numberOfPeople) {
+            System.out.println("% of times matching birthdays in "
+                    + numberOfTrials + " trials: " + "for " + numberOfPeople + " People is: "
+                    + (sameBirthdayCases * 100.0f) / numberOfTrials + "%" );
         }
     }
